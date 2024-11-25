@@ -4,7 +4,7 @@ export const todoData: Todo[] = [
     {
         id: 1,
         title: 'Learn React',
-        completed: true
+        completed: false
     },
     {
         id: 2,

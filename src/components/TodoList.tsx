@@ -1,21 +1,24 @@
 import { todoData } from '@/data/todos'
 import { useState } from 'react'
 import TodoItem from './TodoItem'
+import { Todo } from '@/types/todo';
 
-function TodoList() {
-  //const [todos, setTodos] = useState(todoData);
+interface TodoListProps {
+  todos: Todo[];
+  onCompletedChange: (id: number, completed: boolean) => void;
+  onDelete: (id: number) => void;
+}
 
-  function setTodoCompleted(id: number, completed: boolean) {
-    alert(`Todo with id ${id} is ${completed ? 'completed' : 'not completed'}`)
-  }
-
+function TodoList({ todos, onCompletedChange, onDelete }: TodoListProps) {
+  const todosSorted = todos.sort()
   return (
     <>
       {
-        todoData.map(todo => (
+        todos.map(todo => (
           <TodoItem 
+            key={todo.id}
             todo={todo}
-            onCompletedChange={setTodoCompleted}
+            onTodoItemCompletedChange={onCompletedChange} // prop drilling to todoitem
           />
         ))
       }
