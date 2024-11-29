@@ -2,7 +2,6 @@ import { InferSchemaType, model, Schema } from "mongoose";
 
 const todoSchema = new Schema({
     title: { type: String, required: true },
-    text: { type: String }, 
 }, { timestamps: true });
 
 type Todo = InferSchemaType<typeof todoSchema>;

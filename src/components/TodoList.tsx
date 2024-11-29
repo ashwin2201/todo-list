@@ -1,5 +1,3 @@
-import { todoData } from '@/data/todos'
-import { useState } from 'react'
 import TodoItem from './TodoItem'
 import { Todo } from '@/types/todo';
 

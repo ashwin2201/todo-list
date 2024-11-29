@@ -18,7 +18,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  @apply mx-16;
+  @apply mx-20 lg:mx-auto lg:max-w-screen-lg
 }
 
 button {
