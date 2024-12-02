@@ -5,8 +5,10 @@ const router = express.Router();
 
 router.get("/", TodosController.getTodos);
 // router level function, although the function is defined in getTodos
-router.get("/:todoId", TodosController.getTodo); // todoId is a variable
+router.get("/:todoId", TodosController.getTodo); // todoId is  a variable
 
 router.post("/", TodosController.createTodos);
+
+router.patch("/:todoId", TodosController.updateNote);
 
 export default router;

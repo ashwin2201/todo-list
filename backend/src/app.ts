@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import todosRoutes from "./routes/todos";
 import morgan from "morgan";
+import createHttpError, { isHttpError } from "http-errors";
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.use("/api/todos", todosRoutes) // goes into routes if it matches this endpoi
 // then checks all routes in router
 
 app.use((req, res, next) => { // passing in a handler function
-    next(Error("Endpoint not found")); 
+    next(createHttpError(404, "Endpoint not found")); 
     // next passes control to next function
     // it does this because we have not ended the req,res cycle
 });
@@ -24,8 +25,12 @@ app.use((err: unknown, req: Request, res: Response, next: NextFunction) => {
     // must have next as 4th argument to maintain signature
     console.log(err);
     let errorMessage = "An unkown error occurred";
-    if (err instanceof Error) errorMessage = err.message;
-    res.status(500).json({ error: errorMessage }); 
+    let statusCode = 500;
+    if (isHttpError(err)) {
+        statusCode = err.status;
+        errorMessage = err.message;
+    }
+    res.status(statusCode).json({ error: errorMessage }); 
     // ended req,res cycle
 }) // error handler amd called every time the app receives a request
 // application level middleware
