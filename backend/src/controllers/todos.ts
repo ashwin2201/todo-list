@@ -44,7 +44,7 @@ export const createTodos: RequestHandler<unknown, unknown, CreateTodoBody, unkno
     // unknown is safer than using any type
     const title = req.body.title;
     const completed = req.body.completed;
-    
+     
     try {
         if (!title) {
             throw createHttpError(400, "Note must have a tile")
@@ -81,3 +81,18 @@ export const updateNote: RequestHandler<UpdateNoteParams, unknown, UpdateNoteBod
     }
 }
 
+export const deleteNote: RequestHandler = async(req, res, next) => {
+    const todoId = req.params.todoId;
+    try {
+        if (!mongoose.isValidObjectId(todoId)) {
+            throw createHttpError(400, "Invalid todo id");
+        }
+        const deletedTodo = await TodoModel.findByIdAndDelete(todoId).exec()
+        if (!deletedTodo) {
+            throw createHttpError(404, "Todo not found");
+        }
+        res.sendStatus(204); // no json body so you send status
+    } catch (err) {
+        next(err);
+    }
+}

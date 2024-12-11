@@ -11,6 +11,17 @@ function Page() {
     todos, addTodo, setTodoCompleted, deleteTodo, deleteAllCompleted
   } = useTodos();
 
+  /*
+  useEffect(() => {
+    async function loadTodos() {
+      const response = await fetch("http://localhost:5000/api/todos", { method: "GET"});
+        const todos = await response.json();
+        setTodos(todos);
+    }
+    loadTodos();
+  }, []); // executes one time
+  */
+
   return (
     <div className="flex flex-col">
       <Header />
@@ -28,4 +39,4 @@ function Page() {
   )
   }
 
-export default Page
+export default Page;

@@ -11,4 +11,6 @@ router.post("/", TodosController.createTodos);
 
 router.patch("/:todoId", TodosController.updateNote);
 
+router.delete("/:todoId", TodosController.deleteNote);
+
 export default router;
