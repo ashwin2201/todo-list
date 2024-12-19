@@ -3,11 +3,12 @@ import express, { NextFunction, Request, Response } from "express";
 import todosRoutes from "./routes/todos";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
+import cors from "cors";
 
 const app = express();
 
+app.use(cors());
 app.use(morgan("dev")); // prints out all requests which is nice to see
-
 app.use(express.json()); // can now send json data to server
 
 app.use("/api/todos", todosRoutes) // goes into routes if it matches this endpoint

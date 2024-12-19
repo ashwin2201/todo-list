@@ -4,6 +4,7 @@ import React from 'react'
 
 interface TodoItemProps {
     todo: Todo;
+    // TODO for backend: need to change todo model to conform to backend
     onCompletedChange: (id: number, completed: boolean) => void;
     onDelete: (id: number) => void;
 }
